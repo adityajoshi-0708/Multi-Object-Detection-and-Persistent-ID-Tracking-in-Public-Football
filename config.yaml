@@ -1,0 +1,57 @@
+# Configuration file for Football Analysis Pipeline
+# Adjust these parameters to optimize for your specific use case
+
+# Video Settings
+VIDEO:
+  INPUT_PATH: 'input_videos/1.mp4'
+  OUTPUT_PATH: 'output_videos/output_video.avi'
+  FRAME_STRIDE: 1  # Process every Nth frame (1=all frames)
+  
+# Detection Settings
+DETECTION:
+  MODEL_PATH: 'models/best.pt'
+  CONFIDENCE_THRESHOLD: 0.1
+  INPUT_SIZE: [384, 640]
+  BATCH_SIZE: 20
+  USE_GPU: true  # Auto-detect if GPU available
+
+# Tracking Settings
+TRACKING:
+  TRACKER_TYPE: 'bytetrack'  # bytetrack, deepsort
+  MAX_AGE: 30  # Frames to keep tracklet alive
+  MIN_HITS: 3  # Min detections to start track
+  IOU_THRESHOLD: 0.3
+
+# Analytics Settings
+ANALYTICS:
+  CALCULATE_TRAJECTORIES: true
+  GENERATE_HEATMAP: true
+  CALCULATE_POSSESSION: true
+  CALCULATE_PERFORMANCE_METRICS: true
+  SPEED_SMOOTHING_WINDOW: 5  # Frames for moving average
+
+# Visualization Settings
+VISUALIZATION:
+  DRAW_TRAJECTORIES: true
+  TRAJECTORY_LENGTH: 30  # Frames to show in trail
+  DRAW_ID_LABELS: true
+  DRAW_SPEED: true
+  DRAW_TEAM_COLORS: true
+  DRAW_POSSESSION_BAR: true
+  HEATMAP_COLORMAP: 'jet'  # jet, hot, cool, spring, etc.
+
+# Output Settings
+OUTPUT:
+  SAVE_STATISTICS: true
+  STATISTICS_FILE: 'output_videos/statistics.json'
+  SAVE_HEATMAPS: true
+  HEATMAPS_DIR: 'output_videos/heatmaps'
+  SAVE_TRAJECTORIES: true
+  TRAJECTORIES_FILE: 'output_videos/trajectories.json'
+
+# Processing Settings
+PROCESSING:
+  USE_STUBS: true  # Cache detection results
+  STUBS_DIR: 'stubs'
+  PARALLEL_FRAMES: 4  # Parallel frame processing threads
+  SHOW_PROGRESS: true
